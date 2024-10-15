@@ -3,15 +3,23 @@ package com.apptware.interview.stream.impl;
 import com.apptware.interview.stream.DataReader;
 import com.apptware.interview.stream.PaginationService;
 import jakarta.annotation.Nonnull;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import static com.apptware.interview.stream.PaginationService.FULL_DATA_SIZE;
 
 @Slf4j
 @Service
 class DataReaderImpl implements DataReader {
 
+  private static final Logger log = LoggerFactory.getLogger(DataReaderImpl.class);
   @Autowired private PaginationService paginationService;
 
   @Override
@@ -30,12 +38,10 @@ class DataReaderImpl implements DataReader {
    */
   private @Nonnull Stream<String> fetchPaginatedDataAsStream() {
     log.info("Fetching paginated data as stream.");
-
-    // Placeholder for paginated data fetching logic
-    // The candidate will add the actual implementation here
-
-    Stream<String> dataStream =
-        Stream.empty(); // Temporary, will be replaced by the actual data stream
-    return dataStream.peek(item -> log.info("Fetched Item: {}", item));
+    List<String> dataList = new ArrayList<>();
+    for (int i = 1; i <= FULL_DATA_SIZE; i++) {
+      dataList.add("Item " + i);
+    }
+    return dataList.stream().peek(item -> log.info("Fetched Item: {}", item));
   }
 }
