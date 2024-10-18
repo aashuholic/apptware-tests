@@ -38,10 +38,8 @@ class DataReaderImpl implements DataReader {
    */
   private @Nonnull Stream<String> fetchPaginatedDataAsStream() {
     log.info("Fetching paginated data as stream.");
-    List<String> dataList = new ArrayList<>();
-    for (int i = 1; i <= FULL_DATA_SIZE; i++) {
-      dataList.add("Item " + i);
-    }
+    List<String> dataList = paginationService.getPaginatedData(1, FULL_DATA_SIZE);
+
     return dataList.stream().peek(item -> log.info("Fetched Item: {}", item));
   }
 }

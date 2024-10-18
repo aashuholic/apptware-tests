@@ -4,6 +4,8 @@ import com.apptware.interview.stream.PaginationService;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 class PaginationServiceImpl implements PaginationService {
 
   private static final List<String> DATA = new ArrayList<>();
+  private static final Logger log = LoggerFactory.getLogger(PaginationServiceImpl.class);
 
   static {
     for (int i = 1; i <= FULL_DATA_SIZE; i++) {
